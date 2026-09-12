@@ -1,4 +1,3 @@
-import { time } from "console";
 import os, { type } from "os";
 
 let CPU_Model = null;
@@ -13,14 +12,14 @@ function CPU_Usage(){
 
     // if that went correct
     let totatTime = 0;
+    let totalIdle = 0;
+
     cpu_infos.forEach((core) => {
         for (const type in  core.times){
             totatTime += core.times[type];
         }
+        totalIdle += core.times.idle;
     });
 
-    return totatTime;
+    return {totatTime, totalIdle};
 }
-
-
-
