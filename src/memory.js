@@ -1,6 +1,4 @@
-import { ftruncate } from "fs";
 import os from "os";
-import { cpuUsage } from "process";
 
 // Global vars 
 const Bytes_Per_KB = 1024;
@@ -14,9 +12,15 @@ function bytesToGB(bytes){
 
 // func to return the curr free memory
 function getFree_Memory(){
-    const curr_free_memo = os.freemem()
+    const curr_free_memo = os.freemem();
     return bytesToGB(curr_free_memo);
 }
 
+function getTotal_memo(){
+    const total_memo =  os.totalmem();    
+    return Math.round(bytesToGB(total_memo));
+}
 
-export {getFree_Memory};
+console.log(getTotal_memo())
+
+export {getFree_Memory, getTotal_memo};
