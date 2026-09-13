@@ -1,8 +1,10 @@
 import os, { type } from "os";
 
-let CPU_Model = null;
-let CPU_SPEED = null;
+let CPU_Model = os.cpus()[0].model;
+let CPU_SPEED = os.cpus()[0].speed;
 
+console.log(CPU_Model);
+console.log(CPU_SPEED);
 
 
 // tracking the CPU usage 
@@ -41,4 +43,4 @@ setInterval(() => {
 }, 1000);
 
 
-
+export {CPU_Model, CPU_SPEED};
