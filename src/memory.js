@@ -16,11 +16,11 @@ function getFree_Memory(){
     return bytesToGB(curr_free_memo);
 }
 
+// func to return the curr total memory
 function getTotal_memo(){
     const total_memo =  os.totalmem();    
     return Math.round(bytesToGB(total_memo));
 }
 
-console.log(getTotal_memo())
 
 export {getFree_Memory, getTotal_memo};
