@@ -33,4 +33,4 @@ async function getNetworkUploadSpeed() {
 
 }
 
-export { getNetworkUploadSpeed }
+export { getNetworkUploadSpeed };
