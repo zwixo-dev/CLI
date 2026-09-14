@@ -24,21 +24,13 @@ async function getNetworkUploadSpeed() {
         };
         const fileSizeInBytes = 2000000;
         const speed = await testNetworkSpeed.checkUploadSpeed(options, fileSizeInBytes);
-        
-        if (!speed) return "Something went wrong run the cmd agian.."
-        // else 
         return speed;
+
     } catch (error) {
+        console.error("Upload test failed:", error.message);
         return console.log("Something went wrong run the cmd agian..");
     }
 
 }
 
-export {getNetworkUploadSpeed}
-
-// setInterval(async() => {
-//     const speed_test = await getNetworkUploadSpeed();
-//     console.log(speed_test);
-// }, 1000);
-
-
+export { getNetworkUploadSpeed }
