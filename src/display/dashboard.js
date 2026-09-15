@@ -15,9 +15,11 @@ function cpuTracking() {
 }
 
 setInterval(async() => {
-    process.stdout.write("\x1b[4A\x1b[0G");
-
-    const speed_test = await getNetworkUploadSpeed();
+    // wait until i get the network data :)
+    const networkSpeedTest = await getNetworkUploadSpeed();
+    
+    // process.stdout.write("\x1b[5A\x1b[0G");
+    process.stdout.write("\x1b[H");
 
     process.stdout.write(`\x1b[KCPU Model: ${CPU_Model}\n`);
     process.stdout.write(`\x1b[KCPU Speed: ${CPU_SPEED} MHz\n`);
@@ -25,6 +27,9 @@ setInterval(async() => {
     process.stdout.write(`\x1b[KRAM : ${getTotal_memo()}/${getFree_Memory().toFixed(4)} GB\n`);
 
     // network infos
-    
-
+    if(networkSpeedTest && Object.keys(networkSpeedTest).length === 3){
+        process.stdout.write(`\x1b[KNetwork : ${networkSpeedTest.bps}bps | ${networkSpeedTest.kbps}kbps | ${networkSpeedTest.kbps}mbps\n`);
+    }else{
+        process.stdout.write(`\x1b[KNetwork : loading...!\n`);
+    }
 }, 1000);
