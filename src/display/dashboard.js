@@ -1,6 +1,7 @@
 import { CPU_Model, CPU_SPEED, CPU_Usage } from "../core/cpu.js";
 import { getFree_Memory, getTotal_memo } from "../core/memory.js";
 import { getNetworkUploadSpeed } from "../core/network.js";
+import ansiColors from "ansi-colors";
 
 // ---- function for cpu tracking ----
 const startTrack = CPU_Usage();
@@ -20,16 +21,16 @@ setInterval(async() => {
     
     // process.stdout.write("\x1b[5A\x1b[0G");
     process.stdout.write("\x1b[H");
+    // 
+    process.stdout.write(`\x1b[K${ansiColors.bold("CPU Model:")} ${ansiColors.green(`${CPU_Model}`)}\n`);
+    process.stdout.write(`\x1b[K${ansiColors.bold("CPU Speed:")} ${ansiColors.green(`${CPU_SPEED} MHz`)}\n`);
+    process.stdout.write(`\x1b[K${ansiColors.bold("CPU Usage:")} ${ansiColors.green(`${cpuTracking()}%`)}\n`);
+    process.stdout.write(`\x1b[K${ansiColors.bold("RAM:")} ${ansiColors.green(`${getTotal_memo()}/${getFree_Memory().toFixed(4)} GB`)}\n`);
 
-    process.stdout.write(`\x1b[KCPU Model: ${CPU_Model}\n`);
-    process.stdout.write(`\x1b[KCPU Speed: ${CPU_SPEED} MHz\n`);
-    process.stdout.write(`\x1b[KCPU Usage: ${cpuTracking()}%\n`);
-    process.stdout.write(`\x1b[KRAM : ${getTotal_memo()}/${getFree_Memory().toFixed(4)} GB\n`);
-
-    // network infos
+    // network infos 
     if(networkSpeedTest && Object.keys(networkSpeedTest).length === 3){
-        process.stdout.write(`\x1b[KNetwork : ${networkSpeedTest.bps}bps | ${networkSpeedTest.kbps}kbps | ${networkSpeedTest.kbps}mbps\n`);
+        process.stdout.write(`\x1b[K${ansiColors.bold("Network:")} ${ansiColors.cyan(`${networkSpeedTest.bps}bps | ${networkSpeedTest.kbps}kbps | ${networkSpeedTest.kbps}mbps`)}\n`);
     }else{
-        process.stdout.write(`\x1b[KNetwork : loading...!\n`);
+        process.stdout.write(`\x1b[K${ansiColors.bold("Network:")} ${ansiColors.red("loading...!")}\n`);
     }
 }, 1000);
