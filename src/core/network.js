@@ -28,7 +28,6 @@ async function getNetworkUploadSpeed() {
 
     } catch (error) {
         console.error("Upload test failed:", error.message);
-        return console.log("Something went wrong run the cmd agian..");
     }
 
 }
